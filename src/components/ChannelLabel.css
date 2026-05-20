@@ -1,0 +1,29 @@
+.channel-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Syne Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.channel-label__text {
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.channel-label__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  display: block;
+}
+
+.channel-label__index {
+  white-space: nowrap;
+  font-feature-settings: "tnum" 1;
+  color: var(--text-muted);
+}
