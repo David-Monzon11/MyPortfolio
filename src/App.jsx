@@ -198,14 +198,15 @@ function AppInner() {
               <Mail size={14} />
               SEND EMAIL
             </button>
-            <button
+            <a
+              href="/David_Monzon_CV.pdf"
+              download="David_Monzon_CV.pdf"
               className="hero__btn"
-              onClick={() => window.location.href = 'app-release.apk'}
               id="btn-download-cv"
             >
               <Download size={14} />
               DOWNLOAD CV
-            </button>
+            </a>
           </div>
         </section>
 
@@ -353,14 +354,15 @@ function AppInner() {
                 <p className="capstone-title">SafeHito</p>
                 <p className="capstone-meta">IOT · AI-Based Fungal Detection &amp; Diagnosis System — African Catfish</p>
                 <img src="CapsLogo.png" alt="SafeHito Capstone Project" className="capstone-img" />
-                <button
+                <a
+                  href="/app-release.apk"
+                  download="app-release.apk"
                   className="capstone-btn"
-                  onClick={() => window.location.href = 'app-release.apk'}
                   id="btn-download-apk"
                 >
                   <Download size={14} />
                   DOWNLOAD APK
-                </button>
+                </a>
               </RackCard>
             </section>
 

@@ -109,6 +109,7 @@ button {
 
 /* ── LAYOUT ───────────────────────────────────── */
 .site-wrapper {
+  position: relative;
   padding-left: 52px; /* room for spine socials */
   padding-right: 0;
   min-height: 100vh;
@@ -631,10 +632,7 @@ button {
 @media (max-width: 1024px) {
   .site-wrapper {
     padding-left: 0;
-  }
-
-  .spine-socials {
-    display: none;
+    padding-bottom: 80px; /* Room for footer socials */
   }
 
   .main-grid {
