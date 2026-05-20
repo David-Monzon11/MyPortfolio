@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart } from 'lucide-react';
+import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart, ArrowRight, Eye } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
@@ -9,6 +10,9 @@ import ChannelLabel from './components/ChannelLabel';
 import SignalTag from './components/SignalTag';
 import SpotlightCard from './components/SpotlightCard';
 import Carousel from './components/Carousel';
+import ProjectModal from './components/ProjectModal';
+import BeatBot from './components/BeatBot';
+
 
 /* ── DATA ─────────────────────────────────────── */
 
@@ -81,19 +85,19 @@ const EXPERIENCES = [
 const TECH_GROUPS = [
   {
     heading: 'Frontend',
-    tags: ['REACT', 'RN', 'TS', 'RCHRTS', 'LEAFLET', 'BS5'],
+    tags: ['React', 'React Native', 'TypeScript', 'Recharts', 'Leaflet.js', 'Bootstrap 5'],
   },
   {
     heading: 'Backend & Integration',
-    tags: ['JAVA', 'C#', 'C++', 'PHP', 'NODE', 'PY', 'JWT', 'REST', 'GHL', 'OAUTH', 'IFRAME', 'WBHK', 'SMPH', 'VPS', 'HWAPI'],
+    tags: ['Java', 'C#', 'C++', 'PHP', 'Node.js', 'Python', 'JWT Auth', 'RESTful APIs', 'GoHighLevel', 'OAuth 2.0', 'Secure iframe', 'Webhooks', 'Semaphore SMS', 'VPS Hosting', 'Hardware API'],
   },
   {
     heading: 'Cloud & Infrastructure',
-    tags: ['GCP', 'DOCKER', 'CBUILD', 'FBASE'],
+    tags: ['Google Cloud', 'Docker', 'Cloud Build', 'Firebase'],
   },
   {
     heading: 'Database & Tools',
-    tags: ['MYSQL', 'GIT', 'GITHUB', 'POSTMAN', 'VITE'],
+    tags: ['MySQL', 'Git', 'GitHub', 'Postman', 'Vite'],
   },
 ];
 
@@ -106,7 +110,7 @@ const PROJECTS = [
     url: 'app.nolasmspro.com',
     href: 'https://app.nolasmspro.com',
     logo: 'https://app.nolasmspro.com/favicon.png',
-    desc: 'A full-stack GoHighLevel Marketplace App enabling bulk SMS for PH agencies. Built the complete GHL integration layer: Agency OAuth SSO, custom iframe Agency Panel, sub-account provisioning, and webhook-driven SMS delivery connected to Semaphore & SIM hardware gateways. Includes a dedicated agency management panel for hardware gateway configuration and a centralized sys-admin portal for rate-limit management and zero-downtime performance tracking.',
+    desc: 'NOLA SMS Pro is a full-stack SaaS integration platform that extends GoHighLevel (GHL) with custom SMS capabilities, enabling agencies to route messages through hybrid cloud APIs and private hardware SIM gateways for improved delivery control and scalability.',
     tags: ['GHL MKT', 'OAUTH', 'IFRAME', 'WBHK', 'SMS', 'FBASE', 'PHP', 'GCP', 'SUB-ACCT', 'RATE LMT', 'HWAPI', 'SMPH'],
   }
 ];
@@ -140,6 +144,8 @@ const EDUCATION = [
 function AppInner() {
   const sliderRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isNolaModalOpen, setIsNolaModalOpen] = useState(false);
+  const [isSafeHitoModalOpen, setIsSafeHitoModalOpen] = useState(false);
 
   const handleDotClick = (index) => {
     setActiveSlide(index);
@@ -181,7 +187,7 @@ function AppInner() {
 
         {/* ── HERO ────────────────────────────── */}
         <section className="hero" aria-label="Introduction">
-          <p className="hero__role">Backend Developer · API Integration · GHL Specialist</p>
+          <p className="hero__role">Junior Software Engineer</p>
           <h1 className="hero__name">D A V I D&nbsp;&nbsp;D.&nbsp;&nbsp;M O N Z O N</h1>
           <div className="hero__meta">
             <span className="hero__location">
@@ -219,16 +225,19 @@ function AppInner() {
             {/* ABOUT */}
             <section className="section" id="about">
               <RackCard unit="U1" label="ABOUT" index="01" delay={0}>
-                <ChannelLabel label="ABOUT" index="01" />
+                <ChannelLabel label="ABOUT ME" index="01" />
                 <div className="rack-divider" />
                 <p className="about-text">
-                  I am a results-driven creator who thrives on solving complex puzzles through code. By nature, I am a builder and my passion lies in transforming manual, time-consuming tasks into seamless, automated experiences that just work.
+                  I am a Junior Software Engineer focused on building backend systems and integrating APIs that help applications work smoothly and reliably. 
                 </p>
                 <p className="about-text">
-                  Beyond the syntax, I am dedicated to building reliable digital bridges between people and technology. I believe in clean logic, efficient data, and the power of "set-it-and-forget-it" systems that provide real value and efficiency.
+                  I like building software that connects systems, solves real problems, and works reliably in real environments.
                 </p>
                 <p className="about-text">
-                  Whether I'm architecting a backend or syncing a complex API, my goal is always the same: to create something that is not just functional, but intentionally elegant and robust.
+                  I have worked on real projects where I helped build system logic, connect services, and improve how data flows across applications. These experiences gave me a deeper understanding of how software works beyond the interface, especially on the backend side of systems.
+                </p>
+                <p className="about-text">
+                  I am actively building and expanding my skills in system design and backend development as I continue my path toward becoming a software engineer, while contributing to real and meaningful projects.
                 </p>
               </RackCard>
             </section>
@@ -319,14 +328,20 @@ function AppInner() {
                   </div>
                   <div className="rack-divider-line" style={{ margin: '0 0 12px' }} />
                   <p className="project-desc">{project.desc}</p>
-                  <div className="project-tags">
-                    {project.tags.map((tag) => (
-                      <SignalTag key={tag} label={tag} />
-                    ))}
-                  </div>
+                  <button
+                    className="project-details-btn"
+                    onClick={() => {
+                      if (project.id === 'nola-app') {
+                        setIsNolaModalOpen(true);
+                      }
+                    }}
+                  >
+                    View Full Details
+                    <ArrowRight size={14} />
+                  </button>
                 </SpotlightCard>
               ))}
-              
+
             </section>
                 {/* CAPSTONE */}
             <section className="section" id="capstone">
@@ -336,15 +351,24 @@ function AppInner() {
                 <p className="capstone-title">SafeHito</p>
                 <p className="capstone-meta">IOT · AI-Based Fungal Detection &amp; Diagnosis System — African Catfish</p>
                 <img src="CapsLogo.png" alt="SafeHito Capstone Project" className="capstone-img" />
-                <a
-                  href="/SafeHito_Final_Paper.pdf"
-                  download="SafeHito_Final_Paper.pdf"
-                  className="capstone-btn"
-                  id="btn-download-pdf"
-                >
-                  <Download size={14} />
-                  DOWNLOAD PDF
-                </a>
+                <div className="capstone-actions">
+                  <button
+                    className="capstone-btn capstone-btn--primary"
+                    onClick={() => setIsSafeHitoModalOpen(true)}
+                  >
+                    <Eye size={14} />
+                    VIEW DETAILS
+                  </button>
+                  <a
+                    href="/SafeHito_Final_Paper.pdf"
+                    download="SafeHito_Final_Paper.pdf"
+                    className="capstone-btn"
+                    id="btn-download-pdf"
+                  >
+                    <Download size={14} />
+                    DOWNLOAD PDF
+                  </a>
+                </div>
               </RackCard>
             </section>
 
@@ -370,6 +394,23 @@ function AppInner() {
           </div>
         </div>
       </main>
+
+      {/* Dynamic Case Study Modals */}
+      <AnimatePresence>
+        {isNolaModalOpen && (
+          <ProjectModal
+            type="nola"
+            onClose={() => setIsNolaModalOpen(false)}
+          />
+        )}
+        {isSafeHitoModalOpen && (
+          <ProjectModal
+            type="safehito"
+            onClose={() => setIsSafeHitoModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+      <BeatBot />
     </div>
   );
 }

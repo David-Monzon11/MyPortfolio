@@ -69,7 +69,7 @@
 .spotlight-card:hover {
   border-left: 4px solid var(--accent);
   transform: translate(2px, -2px);
-  box-shadow: -2px 2px 0 var(--accent);
+  box-shadow: -2px 2px 0 var(--accent), 0 0 20px var(--accent-glow);
 }
 
 .spotlight-card:hover::after {

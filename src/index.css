@@ -10,6 +10,7 @@
   --text-primary: #f0ebe0;
   --text-muted:   #888880;
   --accent:       #ff3333; /* Red accent for dark mode */
+  --accent-glow:  rgba(255, 51, 51, 0.15);
   --border:       rgba(240, 235, 224, 0.08);
   --noise-opacity: 0.035;
 
@@ -25,6 +26,7 @@
   --text-primary: #111111;
   --text-muted:   #666660;
   --accent:       #111111; /* Black accent for light mode */
+  --accent-glow:  rgba(17, 17, 17, 0.08);
   --border:       rgba(17, 17, 17, 0.12);
   --noise-opacity: 0.025;
 
@@ -503,6 +505,11 @@ button {
   color: var(--text-muted);
   line-height: 1.75;
   margin: 12px 0;
+  /* Keep descriptions neat */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-tags {
@@ -510,6 +517,63 @@ button {
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.project-details-btn {
+  margin-top: 16px;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: rgba(22, 20, 16, 0.4);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 var(--accent-glow);
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.project-details-btn:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+  background: rgba(255, 51, 51, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 15px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .project-details-btn {
+  background: rgba(255, 253, 248, 0.6);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .project-details-btn:hover {
+  background: rgba(17, 17, 17, 0.06);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 12px var(--accent-glow);
+}
+
+.project-details-btn:active {
+  transform: translateY(0);
+}
+
+.project-details-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s ease;
+}
+
+.project-details-btn:hover svg {
+  transform: translateX(3px);
 }
 
 /* ── CERTIFICATIONS ───────────────────────────── */
@@ -567,33 +631,70 @@ button {
   border-color: var(--accent);
 }
 
+.capstone-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+
 .capstone-btn {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 10px 16px;
   border: 1px solid var(--border);
   border-radius: 0;
   background: transparent;
   color: var(--text-muted);
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .capstone-btn:hover {
   border-color: var(--accent);
-  background: var(--accent);
-  color: var(--bg);
+  color: var(--text-primary);
+  background: rgba(255, 51, 51, 0.03);
+}
+
+[data-theme="light"] .capstone-btn:hover {
+  background: rgba(17, 17, 17, 0.03);
+}
+
+.capstone-btn--primary {
+  border-color: var(--accent);
+  background: rgba(255, 51, 51, 0.08);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 10px var(--accent-glow);
+}
+
+.capstone-btn--primary:hover {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 15px var(--accent-glow);
+}
+
+[data-theme="light"] .capstone-btn--primary {
+  background: rgba(17, 17, 17, 0.05);
+  border-color: var(--accent);
+  color: var(--text-primary);
 }
 
 .capstone-btn svg {
   width: 14px;
   height: 14px;
+}
+
+@media (max-width: 480px) {
+  .capstone-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 .capstone-meta {
