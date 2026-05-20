@@ -326,7 +326,28 @@ function AppInner() {
                   </div>
                 </SpotlightCard>
               ))}
+              
             </section>
+                {/* CAPSTONE */}
+            <section className="section" id="capstone">
+              <RackCard unit="U6" label="CAPSTONE" index="06" delay={0.15}>
+                <ChannelLabel label="CAPSTONE" index="06" />
+                <div className="rack-divider" />
+                <p className="capstone-title">SafeHito</p>
+                <p className="capstone-meta">IOT · AI-Based Fungal Detection &amp; Diagnosis System — African Catfish</p>
+                <img src="CapsLogo.png" alt="SafeHito Capstone Project" className="capstone-img" />
+                <a
+                  href="/SafeHito_Final_Paper.pdf"
+                  download="SafeHito_Final_Paper.pdf"
+                  className="capstone-btn"
+                  id="btn-download-pdf"
+                >
+                  <Download size={14} />
+                  DOWNLOAD PDF
+                </a>
+              </RackCard>
+            </section>
+
 
             {/* CERTIFICATIONS */}
             <section className="section" id="certifications">
@@ -343,26 +364,6 @@ function AppInner() {
                     <img key={i} src={src} alt={`Certificate ${i + 1}`} className="cert-item" />
                   ))}
                 </div>
-              </RackCard>
-            </section>
-
-            {/* CAPSTONE */}
-            <section className="section" id="capstone">
-              <RackCard unit="U6" label="CAPSTONE" index="06" delay={0.15}>
-                <ChannelLabel label="CAPSTONE" index="06" />
-                <div className="rack-divider" />
-                <p className="capstone-title">SafeHito</p>
-                <p className="capstone-meta">IOT · AI-Based Fungal Detection &amp; Diagnosis System — African Catfish</p>
-                <img src="CapsLogo.png" alt="SafeHito Capstone Project" className="capstone-img" />
-                <a
-                  href="/app-release.apk"
-                  download="app-release.apk"
-                  className="capstone-btn"
-                  id="btn-download-apk"
-                >
-                  <Download size={14} />
-                  DOWNLOAD APK
-                </a>
               </RackCard>
             </section>
 
