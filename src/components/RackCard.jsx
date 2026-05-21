@@ -5,7 +5,7 @@ import './RackCard.css';
 
 export default function RackCard({ unit = 'U1', label = '', index = '01', children, delay = 0, className = '' }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const isInView = useInView(ref, { once: true, margin: '0px' });
 
   return (
     <motion.div
