@@ -11,8 +11,8 @@ export default function RackCard({ unit = 'U1', label = '', index = '01', childr
     <motion.div
       ref={ref}
       className={`rack-card ${className}`}
-      initial={{ clipPath: 'inset(0 0 100% 0)', opacity: 0 }}
-      animate={isInView ? { clipPath: 'inset(0 0 0% 0)', opacity: 1 } : {}}
+      initial={{ y: 20, opacity: 0 }}
+      animate={isInView ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
     >
       <span className="rack-unit-id">{unit}</span>

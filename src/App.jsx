@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart, ArrowRight, Eye } from 'lucide-react';
+import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart, ArrowRight, Eye, Cloud } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -12,92 +12,64 @@ import SpotlightCard from './components/SpotlightCard';
 import Carousel from './components/Carousel';
 import ProjectModal from './components/ProjectModal';
 import BeatBot from './components/BeatBot';
+import CertificateModal from './components/CertificateModal';
 
 
 /* ── DATA ─────────────────────────────────────── */
 
-const EXPERIENCES = [
+const EXPERIENCE = [
   {
     id: 1,
-    icon: <MessageSquare size={18} />,
-    title: 'GHL Marketplace App',
-    subtitle: 'NOLA SMS Pro · Intern 2026',
-    description: 'Engineered a full GHL Marketplace App from scratch: Agency OAuth SSO, custom iframe Agency Panel, webhook-driven SMS delivery connected to Semaphore.',
+    icon: <Server size={18} />,
+    title: 'NOLA WEB SOLUTION',
+    subtitle: 'Entry-Level Software Engineer · Feb 2026 – Present',
+    description: [
+      'Developed and maintained GoHighLevel (GHL) Marketplace applications with OAuth SSO and embedded agency dashboards.',
+      'Built webhook-driven SMS and API integration systems for real-time message processing and delivery tracking.',
+      'Engineered backend middleware services using PHP for CRM and data synchronization between external systems and GHL.',
+      'Implemented secure JWT-based authentication and multi-tenant access control for SaaS dashboard features.',
+    ],
   },
   {
     id: 2,
-    icon: <Settings size={18} />,
-    title: 'Laundroworks Automation',
-    subtitle: 'Suds Mgt · Intern 2026',
-    description: 'Architected custom PHP middleware to bridge Suds Mgt POS with GHL, automating contact tagging via secure webhooks.',
+    icon: <Cloud size={18} />,
+    title: 'VoiceUp',
+    subtitle: 'Full-Stack Communication Project · 2025 – 2026',
+    description: [
+      'Built a web-based communication platform focused on real-time messaging and user interaction.',
+      'Developed core frontend and backend features for handling user input and data exchange.',
+      'Integrated API services to support communication workflows and improve system responsiveness.',
+    ],
   },
   {
     id: 3,
     icon: <Activity size={18} />,
-    title: 'SaaS & CRM Integration',
-    subtitle: '2026',
-    description: 'Optimizing high-volume data synchronization between GoHighLevel and custom middleware engines.',
-  },
-  {
-    id: 4,
-    icon: <Lock size={18} />,
-    title: 'Secure API Auth',
-    subtitle: 'JWT · 2026',
-    description: 'Engineering robust security layers and JWT-based access control for multi-tenant Agency dashboard integrations.',
-  },
-  {
-    id: 5,
-    icon: <CheckCircle size={18} />,
-    title: 'Deliverability Tracking',
-    subtitle: '2026',
-    description: 'Implementing advanced PHP status-sync services and logging frameworks to monitor real-time SMS delivery performance.',
-  },
-  {
-    id: 6,
-    icon: <Server size={18} />,
-    title: 'Middleware Engineering',
-    subtitle: 'PHP · 2026',
-    description: 'Architecting efficient RESTful processing engines for handling large-scale API payloads with reliable system uptime.',
-  },
-  {
-    id: 7,
-    icon: <Smartphone size={18} />,
-    title: 'SMS Gateway Infra',
-    subtitle: '2026',
-    description: 'Connecting specialized hardware gateways and Semaphore integrations for automated low-latency messaging flows.',
-  },
-  {
-    id: 8,
-    icon: <Map size={18} />,
-    title: 'iReportPH',
-    subtitle: 'Citizen Reporting · 2025',
-    description: 'A community-focused incident reporting platform built with Vanilla JS and Firebase for real-time tracking.',
-  },
-  {
-    id: 9,
-    icon: <Heart size={18} />,
-    title: 'VitalTrack',
-    subtitle: 'Health Platform · 2024',
-    description: 'A modern React & Firebase health dashboard featuring real-time GPS tracking and dynamic health analytics via Recharts.',
+    title: 'SafeHito (Capstone Project)',
+    subtitle: 'IoT-Based Fish Health Monitoring System · 2025 – 2026',
+    description: [
+      'Developed an IoT-based monitoring system for African catfish health and water quality tracking.',
+      'Implemented sensor-driven data collection and alert logic to detect early signs of fungal infection risks.',
+      'Designed system workflows to help fish farmers improve feeding practices and reduce disease occurrence.',
+    ],
   },
 ];
 
 const TECH_GROUPS = [
   {
     heading: 'Frontend',
-    tags: ['React', 'React Native', 'TypeScript', 'Recharts', 'Leaflet.js', 'Bootstrap 5'],
+    tags: ['React', 'TypeScript', 'Recharts', 'HTML5', 'CSS3', 'Figma'],
   },
   {
     heading: 'Backend & Integration',
-    tags: ['Java', 'C#', 'C++', 'PHP', 'Node.js', 'Python', 'JWT Auth', 'RESTful APIs', 'GoHighLevel', 'OAuth 2.0', 'Secure iframe', 'Webhooks', 'Semaphore SMS', 'VPS Hosting', 'Hardware API'],
+    tags: ['Java', 'C# Basics', 'C++', 'PHP', 'Node.js', 'Python', 'JWT Auth', 'RESTful APIs', 'GoHighLevel', 'OAuth 2.0', 'Secure iframe', 'Webhooks', 'Semaphore SMS API', 'VPS Hosting'],
   },
   {
     heading: 'Cloud & Infrastructure',
-    tags: ['Google Cloud', 'Docker', 'Cloud Build', 'Firebase'],
+    tags: ['Google Cloud Platform', 'Docker', 'Cloud Run', 'Firebase'],
   },
   {
     heading: 'Database & Tools',
-    tags: ['MySQL', 'Git', 'GitHub', 'Postman', 'Vite'],
+    tags: ['MySQL', 'Git', 'GitHub', 'Postman', 'Vite', 'Firestore'],
   },
 ];
 
@@ -110,8 +82,8 @@ const PROJECTS = [
     url: 'app.nolasmspro.com',
     href: 'https://app.nolasmspro.com',
     logo: 'https://app.nolasmspro.com/favicon.png',
-    desc: 'NOLA SMS Pro is a full-stack SaaS integration platform that extends GoHighLevel (GHL) with custom SMS capabilities, enabling agencies to route messages through hybrid cloud APIs and private hardware SIM gateways for improved delivery control and scalability.',
-    tags: ['GHL MKT', 'OAUTH', 'IFRAME', 'WBHK', 'SMS', 'FBASE', 'PHP', 'GCP', 'SUB-ACCT', 'RATE LMT', 'HWAPI', 'SMPH'],
+    desc: 'NOLA SMS Pro is a full-stack SaaS integration platform that extends GoHighLevel (GHL) with custom SMS capabilities, enabling agencies to send one-way SMS notifications through hybrid cloud APIs for improved delivery control, reliability, and scalability.',
+    tags: ['GoHighlevel', 'OAuth', 'IFrame', 'Webhooks', 'SemaphoreMS', 'Firebase (Firestore)', 'PHP', 'GCP', 'Raete Limit', 'Semaphore'],
   }
 ];
 
@@ -139,6 +111,19 @@ const EDUCATION = [
   },
 ];
 
+const CERTIFICATES = [
+  {
+    id: 'intern-cert',
+    src: 'internship.jpg',
+    title: 'Software Engineer Internship — NOLA WEB SOLUTION'
+  },
+  {
+    id: 'cert1-cert',
+    src: 'cert1.jpg',
+    title: 'Certificate of Achievement'
+  }
+];
+
 /* ── COMPONENT ────────────────────────────────── */
 
 function AppInner() {
@@ -146,6 +131,7 @@ function AppInner() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isNolaModalOpen, setIsNolaModalOpen] = useState(false);
   const [isSafeHitoModalOpen, setIsSafeHitoModalOpen] = useState(false);
+  const [activeCert, setActiveCert] = useState(null);
 
   const handleDotClick = (index) => {
     setActiveSlide(index);
@@ -187,7 +173,7 @@ function AppInner() {
 
         {/* ── HERO ────────────────────────────── */}
         <section className="hero" aria-label="Introduction">
-          <p className="hero__role">Junior Software Engineer</p>
+          <p className="hero__role">Entry Level Software Engineer</p>
           <h1 className="hero__name">D A V I D&nbsp;&nbsp;D.&nbsp;&nbsp;M O N Z O N</h1>
           <div className="hero__meta">
             <span className="hero__location">
@@ -228,7 +214,7 @@ function AppInner() {
                 <ChannelLabel label="ABOUT ME" index="01" />
                 <div className="rack-divider" />
                 <p className="about-text">
-                  I am a Junior Software Engineer focused on building backend systems and integrating APIs that help applications work smoothly and reliably. 
+                  I am a Entry Level Software Engineer focused on building backend systems and integrating APIs that help applications work smoothly and reliably. 
                 </p>
                 <p className="about-text">
                   I like building software that connects systems, solves real problems, and works reliably in real environments.
@@ -287,7 +273,7 @@ function AppInner() {
             <section className="section" id="experience">
               <RackCard unit="U4" label="EXPERIENCE" index="04" delay={0.15} className="rack-card--flush">
                 <Carousel
-                  items={EXPERIENCES}
+                  items={EXPERIENCE}
                   channelLabel="EXPERIENCE"
                   channelIndex="EXP"
                   baseWidth={290}
@@ -384,8 +370,14 @@ function AppInner() {
                   onScroll={handleScroll}
                   id="certSlider"
                 >
-                  {['cert1.jpg', 'cert1.jpg', 'cert1.jpg', 'cert1.jpg'].map((src, i) => (
-                    <img key={i} src={src} alt={`Certificate ${i + 1}`} className="cert-item" />
+                  {CERTIFICATES.map((cert) => (
+                    <img
+                      key={cert.id}
+                      src={cert.src}
+                      alt={cert.title}
+                      className="cert-item"
+                      onClick={() => setActiveCert(cert)}
+                    />
                   ))}
                 </div>
               </RackCard>
@@ -407,6 +399,13 @@ function AppInner() {
           <ProjectModal
             type="safehito"
             onClose={() => setIsSafeHitoModalOpen(false)}
+          />
+        )}
+        {activeCert && (
+          <CertificateModal
+            src={activeCert.src}
+            alt={activeCert.title}
+            onClose={() => setActiveCert(null)}
           />
         )}
       </AnimatePresence>

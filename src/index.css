@@ -610,6 +610,7 @@ button {
   border-radius: 0;
   display: block;
   transition: border-color 0.2s ease;
+  cursor: pointer;
 }
 
 .cert-item:hover {

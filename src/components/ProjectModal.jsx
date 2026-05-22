@@ -10,8 +10,8 @@ const MODAL_DATA = {
     title: 'NOLA SMS Pro',
     subtitle: 'Full-Stack Web Development • API Integrations • Cloud Infrastructure',
     summaryParagraphs: [
-      'NOLA SMS Pro is a full-stack SaaS integration platform that extends GoHighLevel (GHL) with custom SMS capabilities, enabling agencies to route messages through hybrid cloud APIs and private hardware SIM gateways for improved delivery control and scalability.',
-      'Built specifically to overcome regional messaging limitations, the platform allows agencies to leverage high-performance cloud SMS gateways alongside physical SIM modules configured on-premise. This hybrid approach bridges modern cloud-based automated CRM workflows with low-latency physical telephony systems, keeping communication costs highly optimized and deliverability robust.'
+    'NOLA SMS Pro is a full-stack SaaS integration platform that extends GoHighLevel (GHL) with custom SMS capabilities, enabling agencies to route messages through cloud-based SMS APIs for improved delivery control, reliability, and scalability.',
+    'Built specifically to optimize messaging workflows within GHL, the platform integrates high-performance cloud SMS gateways directly into automated CRM systems. This approach streamlines communication, improves delivery efficiency, and ensures scalable, cost-effective messaging operations across agency workflows.'
     ],
     architectureHighlights: [
       {
@@ -24,11 +24,11 @@ const MODAL_DATA = {
         ]
       },
       {
-        title: 'Hybrid Messaging',
+        title: 'Messaging Infrastructure',
         items: [
-          'Dual routing system (Semaphore + hardware SIM gateways)',
-          'Async delivery tracking via Google Cloud Scheduler',
-          'Real-time message sync back to GoHighLevel conversations'
+          'One-way SMS routing and delivery system',
+          'Asynchronous message processing for high-volume sending',
+          'Real-time delivery status synchronization across platforms'
         ]
       },
       {
@@ -52,11 +52,11 @@ const MODAL_DATA = {
       },
       {
         heading: 'Infrastructure',
-        tags: ['Firestore', 'Cloud Run', 'Cloud Build', 'Cloud Scheduler', 'Artifact Registry', 'Docker', 'Vercel']
+        tags: ['Firestore', 'Cloud Run', 'Cloud Build', 'Cloud Scheduler', 'Artifact Registry', 'Docker']
       },
       {
         heading: 'Integrations',
-        tags: ['GoHighLevel v2', 'Semaphore API', 'Hardware API']
+        tags: ['GoHighLevel v2', 'Semaphore API']
       }
     ]
   },
@@ -88,28 +88,30 @@ const MODAL_DATA = {
       {
         title: 'Alert & Sync Infrastructure',
         items: [
-          'Multi-channel warning pipeline pushing real-time SMS and Firebase Cloud Alerts',
-          'Cross-platform mobile dashboard (compiled APK) displaying live health feeds and historic charts',
-          'Secure Firebase backend providing real-time data synchronization and diagnostics history'
+          'Real-time alert system delivering instant health and environmental notifications',
+          'Cross-platform mobile dashboard displaying live sensor data and historical analytics',
+          'Firebase-powered backend enabling secure data synchronization and diagnostics storage'
         ]
       }
     ],
     techStack: [
       {
         heading: 'Edge Hardware',
-        tags: ['ESP32 MCU', 'RPi Camera', 'Analog pH Probe', 'DS18B20 Temp', 'Turbidity Sensor', 'DO Sensor']
+        tags: ['ESP32 MCU', 'RPi Camera', 'Analog pH Sensor', 'DS18B20 Temp Sensor', 'Turbidity Sensor', 'Dissolved Oxygen Sensor']
       },
       {
         heading: 'AI & Analytics',
-        tags: ['TensorFlow Lite', 'OpenCV', 'Python (PyTorch)', 'NumPy', 'Pandas']
+        tags: ['TensorFlow Lite', 'OpenCV', 'Python (PyTorch)', 'NumPy', 'Pandas', 'Image Classification', 'Disease Detection Models']
       },
       {
         heading: 'Software Stack',
-        tags: ['React Native', 'Android SDK', 'Firebase Firestore', 'Cloud Functions', 'Node.js', 'MQTT Broker']
+        tags: ['Kotlin (Android App)', 'Android SDK', 'Firebase Realtime Database', 'MQTT (Mosquitto Broker)', 'ESP32 / Arduino Firmware', 'C++ (Embedded Development)'
+        ]
       },
       {
         heading: 'Tools & Protocols',
-        tags: ['Git', 'Docker', 'Postman', 'C++ / PlatformIO', 'Vercel']
+        tags: ['Git', 'GitHub', 'PlatformIO', 'MQTT Protocol', 'Firebase Console'
+        ]
       }
     ]
   }

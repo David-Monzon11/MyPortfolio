@@ -1,0 +1,100 @@
+.cert-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+}
+
+.cert-modal-container {
+  position: relative;
+  background: var(--bg-card);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 16px;
+  max-width: 900px;
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
+}
+
+.cert-modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.cert-modal-close:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+  background: var(--accent);
+  transform: scale(1.05);
+}
+
+.cert-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 80vh;
+}
+
+.cert-modal-image {
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cert-modal-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 12px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .cert-modal-backdrop {
+    padding: 12px;
+  }
+  
+  .cert-modal-container {
+    padding: 12px;
+  }
+
+  .cert-modal-close {
+    top: 8px;
+    right: 8px;
+    border-radius: 0;
+    width: 28px;
+    height: 28px;
+    box-shadow: none;
+  }
+}
