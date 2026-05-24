@@ -33,8 +33,8 @@ const EXPERIENCE = [
   {
     id: 3,
     icon: <Activity size={18} />,
-    title: 'QA & Technical Documentation Contributor',
-    subtitle: 'IoT-Based Fish Health Monitoring System (SafeHito) · 2025 – 2026'
+    title: 'QA & Technical Documentation Support',
+    subtitle: 'IoT-Based Fish Health Monitoring System (SafeHito) · 2024 – 2025'
   }
 ];
 
@@ -99,7 +99,7 @@ const CERTIFICATES = [
   {
     id: 'intern-cert',
     src: 'internship.jpg',
-    title: 'Software Engineer Internship — NOLA WEB SOLUTION'
+    title: 'INTERNSHIP — NOLA WEB SOLUTION'
   },
   {
     id: 'cert1-cert',
@@ -115,7 +115,7 @@ const GALLERY_IMAGES = [
   },
   {
     id: 'Image 2',
-    src: 'd8f99616-c916-4582-8cdd-38785dc4f67c.jpg',
+    src: '9ea80dac-af41-4b5a-b41d-d98b981cb924.jpg',
   },
   {
     id: 'Image 3',
