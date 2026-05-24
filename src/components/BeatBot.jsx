@@ -23,7 +23,7 @@ const RESPONSES_CONFIG = [
   },
   {
     keys: ["tech stack", "skills", "technologies", "languages", "tools", "programming languages", "stack"],
-    response: "David's tech stack is a certified banger! 🎹 React & TypeScript on lead vocals, Node & PHP keeping the low-end groove steady, and Google Cloud holding down the production desk. A perfectly mixed track! 🎧"
+    response: "David's tech stack is a certified banger! 🎹 React & TypeScript on lead vocals, Node & PHP & Laravel keeping the low-end groove steady, and Google Cloud holding down the production desk. A perfectly mixed track! 🎧"
   },
   {
     keys: ["react native", "react", "frontend", "bootstrap", "recharts", "leaflet", "ui", "ux", "interface", "styling", "design", "css"],
@@ -119,7 +119,7 @@ const RESPONSES_CONFIG = [
   }
 ];
 
-const RESPONSES_DEFAULT = "That track sounds deep, but I couldn't catch the melody! 🎵 Ask me about David's projects, tech stack, education, or how to hire him for your next big gig! 🎚️";
+const RESPONSES_DEFAULT = "I couldn't quite decode that signal! 📡 Try asking me about one of these preset tracks:\n\n• 🎹 Tech Stack — David's skills & tools\n• 🚀 NOLA Pro — GHL SMS Marketplace SaaS\n• 🐟 SafeHito — AI IoT Capstone project\n• 📧 Book Gig — Direct contact & hire details\n\nOr select one of the preset mix channels below! 🎚️";
 
 export default function BeatBot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -142,22 +142,73 @@ export default function BeatBot() {
 
   // Reply matcher
   const handleReply = (userText) => {
-    const textClean = userText.toLowerCase().trim();
-    let replyText = RESPONSES_DEFAULT;
+    // Strip common punctuation to prevent strict match failure on trailing characters (e.g. "safehito?")
+    const textClean = userText
+      .toLowerCase()
+      .replace(/[?!.,;:"']/g, "")
+      .trim();
 
-    // Flatten and sort keywords by length descending to match most specific keywords first
-    const flatKeywords = [];
-    RESPONSES_CONFIG.forEach(group => {
-      group.keys.forEach(key => {
-        flatKeywords.push({ key: key.toLowerCase(), response: group.response });
+    let replyText = null;
+
+    // Define core intent keywords and their target responses
+    const INTENTS = [
+      {
+        name: "greeting",
+        keys: ["hello", "hi", "yo", "hey", "sup", "wassup", "greetings", "good morning", "good afternoon", "good evening", "welcome"],
+        response: "Yo! 🎧 I'm David's Portfolio BeatBot—keeping the system groove alive. Tap a preset track below or drop a query, and let's mix it up! 🎚️"
+      },
+      {
+        name: "nola_pro",
+        keys: ["nola sms pro", "nola sms", "nola pro", "nola app", "nola", "ghl", "gohighlevel", "go high level"],
+        response: "NOLA SMS Pro is a major hit single! 🚀 A full-stack SaaS integration platform extending GoHighLevel (GHL) with custom SMS capabilities, routing messages through hybrid cloud APIs and private hardware SIM gateways for improved delivery control and scalability."
+      },
+      {
+        name: "safehito",
+        keys: ["safehito", "catfish", "fish", "fungal detection", "fungal", "iot edge", "iot sensors", "iot", "convolutional neural network", "cnn", "capstone project", "capstone"],
+        response: "SafeHito is David's award-winning Capstone track! 🐟 IoT edge sensors tracking water variables (pH, Temp, DO) and a Convolutional Neural Network AI model to detect & diagnose catfish fungal infections. High-fidelity engineering! 🎻"
+      },
+      {
+        name: "tech_stack",
+        keys: ["tech stack", "skills", "technologies", "languages", "tools", "programming languages", "stack"],
+        response: "David's tech stack is a certified banger! 🎹 React & TypeScript on lead vocals, Node & PHP & Laravel keeping the low-end groove steady, and Google Cloud holding down the production desk. A perfectly mixed track! 🎧"
+      },
+      {
+        name: "book_gig",
+        keys: ["how to hire", "how to contact", "hire david", "contact david", "hire", "contact", "email", "book", "mail", "recruit", "email address", "get in touch", "book gig", "gig"],
+        response: "Want to book David for your next dev gig? Drop a mail at davidmonzon156@gmail.com or hit the 'SEND EMAIL' button on the hero track. Let's make some noise! 🎤"
+      }
+    ];
+
+    // 1. First attempt: match core intents explicitly by key phrasing.
+    // We sort the keys by length descending to match the most specific phrases first
+    for (const intent of INTENTS) {
+      const sortedKeys = [...intent.keys].sort((a, b) => b.length - a.length);
+      const matchedKey = sortedKeys.find(key => textClean.includes(key));
+      if (matchedKey) {
+        replyText = intent.response;
+        break;
+      }
+    }
+
+    // 2. Second attempt: match other keywords in RESPONSES_CONFIG (e.g. joke, status, location, etc.)
+    if (!replyText) {
+      const flatKeywords = [];
+      RESPONSES_CONFIG.forEach(group => {
+        group.keys.forEach(key => {
+          flatKeywords.push({ key: key.toLowerCase(), response: group.response });
+        });
       });
-    });
+      flatKeywords.sort((a, b) => b.key.length - a.key.length);
 
-    flatKeywords.sort((a, b) => b.key.length - a.key.length);
+      const match = flatKeywords.find(item => textClean.includes(item.key));
+      if (match) {
+        replyText = match.response;
+      }
+    }
 
-    const match = flatKeywords.find(item => textClean.includes(item.key));
-    if (match) {
-      replyText = match.response;
+    // 3. Fallback: options-based smarter menu
+    if (!replyText) {
+      replyText = RESPONSES_DEFAULT;
     }
 
     setIsTyping(true);

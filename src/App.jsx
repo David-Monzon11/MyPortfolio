@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart, ArrowRight, Eye, Cloud } from 'lucide-react';
+import { Mail, Download, MapPin, MessageSquare, Settings, Activity, Lock, CheckCircle, Server, Smartphone, Map, Heart, ArrowRight, Eye, Cloud, X } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -21,47 +21,31 @@ const EXPERIENCE = [
   {
     id: 1,
     icon: <Server size={18} />,
-    title: 'NOLA WEB SOLUTION',
-    subtitle: 'Entry-Level Software Engineer · Feb 2026 – Present',
-    description: [
-      'Developed and maintained GoHighLevel (GHL) Marketplace applications with OAuth SSO and embedded agency dashboards.',
-      'Built webhook-driven SMS and API integration systems for real-time message processing and delivery tracking.',
-      'Engineered backend middleware services using PHP for CRM and data synchronization between external systems and GHL.',
-      'Implemented secure JWT-based authentication and multi-tenant access control for SaaS dashboard features.',
-    ],
+    title: 'Software Engineer Intern',
+    subtitle: 'NOLA WEB SOLUTION · Feb 2026 – Present',
   },
   {
     id: 2,
     icon: <Cloud size={18} />,
-    title: 'VoiceUp',
-    subtitle: 'Full-Stack Communication Project · 2025 – 2026',
-    description: [
-      'Built a web-based communication platform focused on real-time messaging and user interaction.',
-      'Developed core frontend and backend features for handling user input and data exchange.',
-      'Integrated API services to support communication workflows and improve system responsiveness.',
-    ],
+    title: 'Full-Stack Developer & UI/UX Designer',
+    subtitle: 'VoiceUp · 2025 – 2026',
   },
   {
     id: 3,
     icon: <Activity size={18} />,
-    title: 'SafeHito (Capstone Project)',
-    subtitle: 'IoT-Based Fish Health Monitoring System · 2025 – 2026',
-    description: [
-      'Developed an IoT-based monitoring system for African catfish health and water quality tracking.',
-      'Implemented sensor-driven data collection and alert logic to detect early signs of fungal infection risks.',
-      'Designed system workflows to help fish farmers improve feeding practices and reduce disease occurrence.',
-    ],
+    title: 'IoT-Based Fish Health Monitoring System',
+    subtitle: 'SafeHito (Capstone Project) · 2025 – 2026',
   },
 ];
 
 const TECH_GROUPS = [
   {
     heading: 'Frontend',
-    tags: ['React', 'TypeScript', 'Recharts', 'HTML5', 'CSS3', 'Figma'],
+    tags: ['React', 'TypeScript', 'HTML5', 'CSS3', 'Figma', 'Bootsrap'],
   },
   {
     heading: 'Backend & Integration',
-    tags: ['Java', 'C# Basics', 'C++', 'PHP', 'Node.js', 'Python', 'JWT Auth', 'RESTful APIs', 'GoHighLevel', 'OAuth 2.0', 'Secure iframe', 'Webhooks', 'Semaphore SMS API', 'VPS Hosting'],
+    tags: ['Java', 'C# Basics', 'C++', 'PHP / Laravel', 'Node.js', 'Python', 'JWT Auth', 'RESTful APIs', 'GoHighLevel', 'OAuth 2.0', 'Secure iframe', 'Webhooks', 'Semaphore SMS API', 'VPS Hosting'],
   },
   {
     heading: 'Cloud & Infrastructure',
@@ -124,6 +108,46 @@ const CERTIFICATES = [
   }
 ];
 
+const GALLERY_IMAGES = [
+  {
+    id: 'Image 1',
+    src: 'd8f99616-c916-4582-8cdd-38785dc4f67c.jpg',
+  },
+  {
+    id: 'Image 2',
+    src: 'd8f99616-c916-4582-8cdd-38785dc4f67c.jpg',
+  },
+  {
+    id: 'Image 3',
+    src: '63c64aa1-7a85-4294-a860-ed9d95c0ccf6.jpg',
+  },
+  {
+    id: 'Image 4',
+    src: '54433ad5-ff3a-4905-923c-4c887c89ef53.jpg',
+  },
+  {
+    id: 'Image 5',
+    src: '581339b8-443f-40e5-b3a2-77840b4fc29f.jpg',
+  },
+  {
+    id: 'Image 6',
+    src: '296194eb-3fcb-44d0-b44c-36596004dd6f.jpg',
+  },
+  {
+    id: 'Image 7',
+    src: 'd389da61-c8cc-4c72-a5c2-fd702a38b72b.jpg',
+  },
+   {
+    id: 'Image 8',
+    src: 'f2b215c3-8be3-49f8-b932-44300f374b2b.jpg',
+  },
+   {
+    id: 'Image 9',
+    src: 'd7017783-8379-4dba-8172-1b0fe8d7e8ca.jpg',
+  },
+];
+
+
 /* ── COMPONENT ────────────────────────────────── */
 
 function AppInner() {
@@ -132,6 +156,7 @@ function AppInner() {
   const [isNolaModalOpen, setIsNolaModalOpen] = useState(false);
   const [isSafeHitoModalOpen, setIsSafeHitoModalOpen] = useState(false);
   const [activeCert, setActiveCert] = useState(null);
+  const [activeGalleryImage, setActiveGalleryImage] = useState(null);
 
   const handleDotClick = (index) => {
     setActiveSlide(index);
@@ -269,19 +294,22 @@ function AppInner() {
               </RackCard>
             </section>
 
-            {/* EXPERIENCE CAROUSEL */}
-            <section className="section" id="experience">
-              <RackCard unit="U4" label="EXPERIENCE" index="04" delay={0.15} className="rack-card--flush">
-                <Carousel
-                  items={EXPERIENCE}
-                  channelLabel="EXPERIENCE"
-                  channelIndex="EXP"
-                  baseWidth={290}
-                  autoplay={true}
-                  loop={true}
-                  pauseOnHover={true}
-                  autoplayDelay={3500}
-                />
+            {/* GALLERY */}
+            <section className="section" id="gallery">
+              <RackCard unit="U7" label="GALLERY" index="07" delay={0.15}>
+                <ChannelLabel label="GALLERY" index="07" />
+                <div className="rack-divider" />
+                <div className="gallery-scroll">
+                  {GALLERY_IMAGES.map((img) => (
+                    <img
+                      key={img.id}
+                      src={img.src}
+                      alt={img.title}
+                      className="gallery-item"
+                      onClick={() => setActiveGalleryImage(img)}
+                    />
+                  ))}
+                </div>
               </RackCard>
             </section>
 
@@ -383,6 +411,22 @@ function AppInner() {
               </RackCard>
             </section>
 
+            {/* EXPERIENCE CAROUSEL */}
+            <section className="section" id="experience">
+              <RackCard unit="U4" label="EXPERIENCE" index="04" delay={0.15} className="rack-card--flush">
+                <Carousel
+                  items={EXPERIENCE}
+                  channelLabel="EXPERIENCE"
+                  channelIndex="EXP"
+                  baseWidth={290}
+                  autoplay={true}
+                  loop={true}
+                  pauseOnHover={true}
+                  autoplayDelay={3500}
+                />
+              </RackCard>
+            </section>
+
           </div>
         </div>
       </main>
@@ -406,6 +450,13 @@ function AppInner() {
             src={activeCert.src}
             alt={activeCert.title}
             onClose={() => setActiveCert(null)}
+          />
+        )}
+        {activeGalleryImage && (
+          <CertificateModal
+            src={activeGalleryImage.src}
+            alt={activeGalleryImage.title}
+            onClose={() => setActiveGalleryImage(null)}
           />
         )}
       </AnimatePresence>

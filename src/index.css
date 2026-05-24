@@ -863,3 +863,48 @@ button {
     padding: 8px 14px;
   }
 }
+
+/* ── GALLERY SECTION ──────────────────────────── */
+.gallery-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  height: 2px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
+
+.gallery-item {
+  flex-shrink: 0;
+  width: 240px;
+  height: 160px;
+  object-fit: cover;
+  scroll-snap-align: start;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  display: block;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 10px var(--accent-glow);
+}
+

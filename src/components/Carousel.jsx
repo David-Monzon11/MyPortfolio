@@ -26,7 +26,6 @@ function CarouselItem({ item, index, itemWidth, trackItemOffset, x }) {
         {item.subtitle && (
           <p className="carousel-item__subtitle">{item.subtitle}</p>
         )}
-        <p className="carousel-item__desc">{item.description}</p>
       </div>
     </motion.div>
   );

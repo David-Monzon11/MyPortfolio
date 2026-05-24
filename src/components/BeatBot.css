@@ -156,6 +156,7 @@
   line-height: 1.55;
   border-radius: 2px;
   animation: beatbot-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  white-space: pre-line;
 }
 
 @keyframes beatbot-slide-in {

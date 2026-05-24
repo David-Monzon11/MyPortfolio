@@ -45,35 +45,10 @@
   pointer-events: none;
 }
 
-/* VU meter on hover */
-.spotlight-card::after {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 32px;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--accent),
-    var(--accent) 2px,
-    transparent 2px,
-    transparent 5px
-  );
-  opacity: 0;
-  transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-  pointer-events: none;
-}
-
 .spotlight-card:hover {
   border-left: 4px solid var(--accent);
   transform: translate(2px, -2px);
   box-shadow: -2px 2px 0 var(--accent), 0 0 20px var(--accent-glow);
-}
-
-.spotlight-card:hover::after {
-  opacity: 0.5;
 }
 
 .spotlight-card:hover .spotlight-card__stripe {
