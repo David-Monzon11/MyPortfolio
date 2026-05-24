@@ -216,8 +216,8 @@ function AppInner() {
               SEND EMAIL
             </button>
             <a
-              href="/David_Monzon_CV.pdf"
-              download="David_Monzon_CV.pdf"
+              href="/DAVID_MONZON.pdf"
+              download="DAVID_MONZON.pdf"
               className="hero__btn"
               id="btn-download-cv"
             >

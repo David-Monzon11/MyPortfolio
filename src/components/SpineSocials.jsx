@@ -7,19 +7,9 @@ const SOCIALS = [
     href: 'https://www.facebook.com/profile.php?id=61583648378739',
   },
   {
-    id: 'instagram',
-    label: 'INSTAGRAM',
-    href: 'https://www.instagram.com/monzy_david/?hl=en',
-  },
-  {
-    id: 'tiktok',
-    label: 'TIKTOK',
-    href: 'https://www.tiktok.com/@13_10_v_9_4',
-  },
-  {
-    id: 'email',
-    label: 'EMAIL',
-    href: 'mailto:davidmonzon156@gmail.com',
+    id: 'GitHub',
+    label: 'GITHUB',
+    href: 'https://github.com/David-Monzon11/',
   },
 ];
 
