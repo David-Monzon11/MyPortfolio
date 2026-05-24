@@ -21,7 +21,7 @@ const EXPERIENCE = [
   {
     id: 1,
     icon: <Server size={18} />,
-    title: 'Software Engineer Intern',
+    title: 'Entry Level Software Engineer',
     subtitle: 'NOLA WEB SOLUTION · Feb 2026 – Present',
   },
   {
@@ -33,9 +33,9 @@ const EXPERIENCE = [
   {
     id: 3,
     icon: <Activity size={18} />,
-    title: 'IoT-Based Fish Health Monitoring System',
-    subtitle: 'SafeHito (Capstone Project) · 2025 – 2026',
-  },
+    title: 'QA & Technical Documentation Contributor',
+    subtitle: 'IoT-Based Fish Health Monitoring System (SafeHito) · 2025 – 2026'
+  }
 ];
 
 const TECH_GROUPS = [
